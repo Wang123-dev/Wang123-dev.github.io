@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obsidian+Gemini CLI | 本地最强个人知识库</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* 主体样式 */
+        body {
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.6;
+        }
+
+        /* 头部导航 */
+        header {
+            background-color: #1d1d1f;
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #34c759;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #34c759;
+        }
+
+        /* 英雄区 */
+        .hero {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #1d1d1f, #34c759);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #6e6e73;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background-color: #34c759;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #28a745;
+        }
+
+        /* 核心优势板块 */
+        .features {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 4rem;
+            color: #1d1d1f;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .feature-card p {
+            color: #6e6e73;
+            font-size: 1rem;
+        }
+
+        /* 工作流示例板块 */
+        .workflows {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 3rem;
+        }
+
+        .workflow-item {
+            margin-bottom: 3rem;
+        }
+
+        .workflow-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .workflow-item p {
+            color: #6e6e73;
+            margin-bottom: 1rem;
+        }
+
+        pre {
+            background-color: #f5f5f7;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.95rem;
+            color: #1d1d1f;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #1d1d1f;
+            color: white;
+            padding: 3rem 0;
+            margin-top: 6rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer-container p {
+            margin-top: 1rem;
+            color: #a1a1a6;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+
+            nav a {
+                margin-left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .workflows {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="header-container">
+            <div class="logo">Obsidian<span>+</span>Gemini CLI</div>
+            <nav>
+                <a href="#features">核心优势</a>
+                <a href="#workflows">工作流示例</a>
+                <a href="#advanced">进阶技巧</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区 -->
+    <section class="hero">
+        <h1>搭建本地最强个人知识库</h1>
+        <p>将 Obsidian 的本地私密管理与 Gemini CLI 的 AI 能力深度融合，用自然语言驱动知识管理，效率倍增且数据完全可控</p>
+        <a href="#features" class="btn">探索核心优势</a>
+    </section>
+
+    <!-- 核心优势板块 -->
+    <section class="features" id="features">
+        <h2 class="section-title">核心优势</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>本地优先，数据私密</h3>
+                <p>所有笔记以 Markdown 格式存储在本地设备，你拥有完全的数据所有权和控制权，无需担心数据泄露。</p>
+            </div>
+            <div class="feature-card">
+                <h3>AI 赋能，效率倍增</h3>
+                <p>利用 Gemini 的语言理解与生成能力，自动化完成总结、翻译、格式转换、大纲生成等繁琐的知识整理工作。</p>
+            </div>
+            <div class="feature-card">
+                <h3>工作流无缝集成</h3>
+                <p>通过 Obsidian 终端插件，直接在 Obsidian 界面内调用 gemini 命令，实现沉浸式知识管理体验。</p>
+            </div>
+            <div class="feature-card">
+                <h3>高度可定制</h3>
+                <p>结合 Shell 脚本和 Templater 插件，创建个性化自动化工作流，满足专属的知识管理需求。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工作流示例板块 -->
+    <section class="workflows" id="workflows">
+        <h2 class="section-title">工作流示例</h2>
+
+        <div class="workflow-item">
+            <h3>示例 1：快速创建一篇新笔记</h3>
+            <p>输入命令即可让 Gemini 生成指定主题的 Markdown 笔记，自动出现在 Obsidian 文件列表中：</p>
+            <pre><code>gemini "生成一篇关于'费曼学习法'的笔记，介绍其核心步骤和应用技巧，使用 Markdown 格式" > "费曼学习法.md"</code></pre>
+        </div>
+
+        <div class="workflow-item">
+            <h3>示例 2：总结一篇长文笔记</h3>
+            <p>提炼长笔记的要点、决策点和待办事项，支持重定向输出到新笔记：</p>
+            <pre><code>gemini "总结以下内容，并列出关键决策点和待办事项：" --file "项目会议纪要.md" > "项目会议纪要-摘要.md"</code></pre>
+        </div>
+
+        <div class="workflow-item">
+            <h3>示例 3：润色和改进现有笔记</h3>
+            <p>优化笔记语言，使其更流畅、专业，审阅后可替换原文：</p>
+            <pre><code>gemini "润色和改进这篇笔记的语言，使其更流畅、更专业：" --file "我的思考草稿.md"</code></pre>
+        </div>
+
+        <div class="workflow-item" id="advanced">
+            <h3>进阶技巧：AI 模板自动化</h3>
+            <p>结合 Templater 插件创建 AI 模板，新建笔记时自动调用 Gemini 生成内容：</p>
+            <pre><code>---
+tags: ai-generated
+creation_date: &lt;% tp.date.now("YYYY-MM-DD") %>
+---
+
+# &lt;% tp.file.title %>
+
+## AI 生成内容
+
+&lt;%*
+  const prompt = await tp.system.prompt("请输入你希望 AI 生成内容的主题：");
+  const command = `gemini "围绕'${prompt}'这个主题，生成一篇详细的介绍性文章"`;
+  const content = await tp.user.exec(command);
+  tR += content;
+%></code></pre>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-container">
+            <div class="logo">Obsidian<span>+</span>Gemini CLI</div>
+            <p>本地智能知识库 · 数据私密 · AI 赋能 · 高效管理</p>
+        </div>
+    </footer>
+</body>
+</html>
